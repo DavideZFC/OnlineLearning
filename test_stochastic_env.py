@@ -1,4 +1,5 @@
 from algos.hedge import hedge
+from algos.ogd import gradient_descent
 from envs.stochastic_env import stochastic_env
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,7 +10,8 @@ n_arms = 10
 
 env = stochastic_env(n_arms,T)
 
-policy = hedge(n_arms, lr)
+policy = gradient_descent(n_arms, lr) #hedge(n_arms, lr)
+
 policy.compute_optimal_lr(T)
 
 

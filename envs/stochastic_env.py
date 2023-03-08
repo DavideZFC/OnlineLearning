@@ -4,6 +4,7 @@ class stochastic_env:
 
     def __init__(self, n_arms, T, means=[]):
         
+        self.T = T
         self.n_arms = n_arms
         if means == []:
             self.means = np.linspace(0.4,0.6,n_arms)
@@ -12,6 +13,11 @@ class stochastic_env:
 
         self.loss_history = np.zeros(T)
         self.ret_history = np.zeros((T,n_arms))
+        self.t = 0
+
+    def reset(self):
+        self.loss_history = np.zeros(self.T)
+        self.ret_history = np.zeros((self.T, self.n_arms))
         self.t = 0
 
     def round(self, action):

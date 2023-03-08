@@ -7,6 +7,9 @@ class hedge:
         self.weights = np.ones(n_arms)
         self.lr = learning_rate
 
+    def reset(self):
+        self.weights = np.ones(self.n_arms)
+
     def compute_optimal_lr(self,T):
         self.lr = (np.log(self.n_arms)/T)**0.5
         print('## Optimal learning rate computed: '+str(self.lr))
