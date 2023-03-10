@@ -8,10 +8,10 @@ from envs.two_adversary_env import adversarial_env
 T = 10000
 lr = 0
 
-n_arms_1 = 5
-n_arms_2 = 5
-game_matrix = np.random.uniform(0,1,size=(n_arms_1, n_arms_2))
-#game_matrix = np.array([[1.,0],[0,-1]])
+n_arms_1 = 2
+n_arms_2 = 2
+# game_matrix = np.random.uniform(0,1,size=(n_arms_1, n_arms_2))
+game_matrix = np.array([[1.,0],[0,-1]])
 env = adversarial_env(game_matrix, T)
 
 print('This is the game matrix:')
