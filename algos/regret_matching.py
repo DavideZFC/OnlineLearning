@@ -14,7 +14,6 @@ class regret_matching:
         theta = np.maximum(self.r, np.zeros(self.n_arms))
         if np.sum(theta) == 0:
             self.x = np.ones(self.n_arms)/self.n_arms
-            print('zero reached')
         else:
             self.x = theta/np.sum(theta)
         return self.x

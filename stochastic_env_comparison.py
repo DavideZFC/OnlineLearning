@@ -1,5 +1,6 @@
 from algos.hedge import hedge
 from algos.ogd import gradient_descent
+from algos.regret_matching import regret_matching
 from envs.stochastic_env import stochastic_env
 from misc.confidence_bounds import bootstrap_ci
 from misc.plot_from_dataset import plot_data
@@ -14,6 +15,7 @@ n_arms = 10
 
 policy_gd = gradient_descent(n_arms, lr) 
 policy_hedge = hedge(n_arms, lr)
+policy_rm = regret_matching(n_arms)
 
 policy_gd.compute_optimal_lr(T)
 policy_hedge.compute_optimal_lr(T)
@@ -40,16 +42,19 @@ def test_policy(policy, T, N):
 N = 50
 results_gd = test_policy(policy_gd, T, N)
 results_hedge = test_policy(policy_hedge, T, N)
+results_rm = test_policy(policy_rm, T, N)
 
 low_gd, high_gd = bootstrap_ci(results_gd)
 low_hedge, high_edge = bootstrap_ci(results_hedge)
+low_rm, high_rm = bootstrap_ci(results_rm)
 
 x = np.linspace(1,T,T)
 
 plot_data(x, low_gd, high_gd, col='C1', label='Gradient descent')
 plot_data(x, low_hedge, high_edge, col='C2', label='Hedge')
+plot_data(x, low_rm, high_rm, col='C3', label='Regret maching')
 
 plt.legend()
-plt.title('Regret of Hedge vs Gradient descent')
+plt.title('Regret of Hedge vs Gradient descent vs Regret maching')
 plt.show()
 
