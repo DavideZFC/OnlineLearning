@@ -56,5 +56,7 @@ plot_data(x, low_rm, high_rm, col='C3', label='Regret maching')
 
 plt.legend()
 plt.title('Regret of Hedge vs Gradient descent vs Regret maching')
+plt.savefig('results/HedgeGDRegretM.pdf')
+
 plt.show()
 
