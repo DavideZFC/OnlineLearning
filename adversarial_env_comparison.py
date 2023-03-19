@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from algos.hedge import hedge
 from algos.ogd import gradient_descent
+from algos.regret_matching import regret_matching
 from envs.two_adversary_env import adversarial_env
 
 
@@ -10,19 +11,22 @@ lr = 0
 
 n_arms_1 = 2
 n_arms_2 = 2
-# game_matrix = np.random.uniform(0,1,size=(n_arms_1, n_arms_2))
-game_matrix = np.array([[1.,0],[0,-1]])
+game_matrix = np.random.uniform(0,1,size=(n_arms_1, n_arms_2))
+# game_matrix = np.array([[1.,0],[0,-1]])
 env = adversarial_env(game_matrix, T)
+
+
 
 print('This is the game matrix:')
 print(game_matrix)
 print('Player1: maximizer - - - - Player2: minimizer')
 
 player1 = hedge(n_arms_1, lr)
-player2 = gradient_descent(n_arms_2, lr)
+player1 = gradient_descent(n_arms_2, lr)
+player2 = regret_matching(n_arms_2)
 
 player1.compute_optimal_lr(T)
-player2.compute_optimal_lr(T)
+# player2.compute_optimal_lr(T)
 
 player_1_strategies = np.zeros((T,n_arms_1))
 player_2_strategies = np.zeros((T,n_arms_2))
