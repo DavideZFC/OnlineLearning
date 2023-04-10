@@ -20,6 +20,18 @@ class stochastic_env:
         self.ret_history = np.zeros((self.T, self.n_arms))
         self.t = 0
 
+    def get_loss(self):
+        ''' returns the loss vector without pulling any action'''
+
+        ret = np.zeros(self.n_arms)
+        for i in range(self.n_arms):
+            ret[i] = np.random.binomial(n=1,p=self.means[i])
+
+        self.t += 1
+
+        return ret
+
+
     def round(self, action):
 
         ret = np.zeros(self.n_arms)
