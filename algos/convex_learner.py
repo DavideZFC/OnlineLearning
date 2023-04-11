@@ -14,13 +14,14 @@ class convex_learner:
 
         self.agents = []
         for i in range(n_arms_first):
-            self.agents[i] = regret_matching(n_arms_second)
+            self.agents.append(regret_matching(n_arms_second))
 
     def act(self):
         pass
 
     def update(self, losses):
 
+        main_action = self.base_agent.act()
         main_loss = np.zeros(self.n_arms_first)
 
         for i in range(self.n_arms_first):
@@ -36,6 +37,8 @@ class convex_learner:
 
         # update base learner
         self.base_agent.update(main_loss)
+
+        return np.dot(main_loss, main_action)
 
             
 
