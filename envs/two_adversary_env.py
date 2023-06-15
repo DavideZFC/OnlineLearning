@@ -13,6 +13,14 @@ class adversarial_env:
         self.ret_history_second = np.zeros((T,self.n_arms_2))
         self.t = 0
 
+    def reset(self):
+        self.loss_history_first *= 0
+        self.ret_history_first *= 0
+
+        self.loss_history_second *= 0
+        self.ret_history_second *= 0
+        self.t = 0        
+
     def round(self, action_1, action_2):
         ret_1 = -np.dot(self.mat, action_2)
         ret_2 = np.dot(action_1, self.mat)
